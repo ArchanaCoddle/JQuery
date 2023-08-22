@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="personalForm">
+        <h1> Personal informations</h1>
+        <form id="submitForm">
+            <label>Name : </label> <br>
+            <input type="text" id="persname"/>
+            <p id="nameError"></p>
+            <br>
+            <label>Address : </label> <br>
+            <textarea id="address" cols="30" rows="3"></textarea>
+            <p id="addressError"></p>
+            <br>
+            <label>DOB : </label> <br>
+            <input type="date" id="date" />
+            <p id="DOBError"></p>
+            <br>
+            <label>age : </label> <br>
+            <select id="age">
+                <option value="nill">Select age group</option>
+                <option value="1-10">1-10</option>
+                <option value="20-30">20-30</option>
+                <option value="40-50">40-50</option>
+                <option value="50-60">50-60</option>
+                <option value="more">60 +</option>
+            </select>
+            <p id="ageError"></p>
+            <br>
+            <label>Gender : </label>
+            <input type="radio" class="gender" name="gender" value="f">
+             <label for="gender">Female</label>
+             <input type="radio" class="gender"name="gender" value="m">
+             <label for="gender">Male</label>
+             <input type="radio" class="gender"name="gender" value="o">
+             <label for="gender">Other</label>
+            <p id="genderError"></p>
+            <br>
+            <label for="agree">Agree to terms : </label> <br>
+            <input type="checkbox" id="agree"  name="agree"/>
+            <p id="agreeError"></p>
+            <br>
+            <button id="submit" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="js/code.jquery.com_jquery-3.7.0.min.js"></script>
+    <script src="js/script.js">  </script>
+    
+</body>
+</html>
