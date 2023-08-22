@@ -58,6 +58,7 @@ $(document).ready(() => {
 
     if (persname !== '' && address !== '' && dob !== '' && age !== 'nill' && gender !== undefined && agree === 'on') {
       alert('your information is submitted successfully.');
+      $('#submitForm').trigger('reset');
     }
   });
 });
