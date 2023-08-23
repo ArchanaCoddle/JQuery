@@ -8,12 +8,11 @@ for( let i = 0; i < dot.length ;i++) {
 
 $(document).ready(function(){  
 
-    // dotClick();
     function showslide(index) {
         document.getElementById('imgs').setAttribute('src', `image/${a[index]}`);
-        dotShow();
+        dotShow(index);
     }
-    function dotShow() {
+    function dotShow(ind) {
         dot.each(function(ind, element) {
             // console.log(element, ind);
             if( ind === selectedIndex) {
@@ -21,8 +20,7 @@ $(document).ready(function(){
             } else {
                 $(element).removeClass('activeDot'); 
             }
-          });
-          
+        });  
     }
 
     $('#next').click(function(){  
@@ -61,18 +59,43 @@ $(document).ready(function(){
 
     $('#dot1').click(function() {
         document.getElementById('imgs').setAttribute('src', 'image/img1.jpg');
+        $('#dot1').addClass('activeDot');
+        $('#dot2').removeClass('activeDot'); 
+        $('#dot3').removeClass('activeDot'); 
+        $('#dot4').removeClass('activeDot'); 
+        $('#dot5').removeClass('activeDot'); 
     });
     $('#dot2').click(function() {
         document.getElementById('imgs').setAttribute('src', 'image/img2.jpg');
+        $('#dot2').addClass('activeDot');
+        $('#dot1').removeClass('activeDot'); 
+        $('#dot3').removeClass('activeDot'); 
+        $('#dot4').removeClass('activeDot'); 
+        $('#dot5').removeClass('activeDot'); 
     });
     $('#dot3').click(function() {
         document.getElementById('imgs').setAttribute('src', 'image/img3.jpg');
+        $('#dot3').addClass('activeDot');
+        $('#dot1').removeClass('activeDot'); 
+        $('#dot2').removeClass('activeDot'); 
+        $('#dot4').removeClass('activeDot'); 
+        $('#dot5').removeClass('activeDot'); 
     });
     $('#dot4').click(function() {
         document.getElementById('imgs').setAttribute('src', 'image/img4.jpg');
+        $('#dot4').addClass('activeDot');
+        $('#dot1').removeClass('activeDot'); 
+        $('#dot2').removeClass('activeDot'); 
+        $('#dot3').removeClass('activeDot'); 
+        $('#dot5').removeClass('activeDot'); 
     });
     $('#dot5').click(function() {
         document.getElementById('imgs').setAttribute('src', 'image/img5.jpg');
+        $('#dot5').addClass('activeDot');
+        $('#dot1').removeClass('activeDot'); 
+        $('#dot2').removeClass('activeDot'); 
+        $('#dot3').removeClass('activeDot'); 
+        $('#dot4').removeClass('activeDot'); 
     });
 
 });
