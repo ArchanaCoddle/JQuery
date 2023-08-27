@@ -30,12 +30,6 @@ let increbutton;
 let decrebutton;
 $(document).ready(function () {
 
-    // function showCount(countshow) {
-    //     console.log('function', countshow);
-    //     $(para).text(countshow);
-
-    // }
-
     $('#b1').click(function () {
         console.log('book1');
         $(".cartItems").css("display", "block");
@@ -47,8 +41,8 @@ $(document).ready(function () {
         const bookPrice = bookContainer.find('h5').text();
 
         if (countb1 > 1) {
-            console.log('hhuhuh', countb1)
-            $(para).text(countb1)
+            console.log('hhuhuh', countb1);
+            $(para).text(countb1);
             countb1 += 1;
         } else {
             images = document.createElement('img');
@@ -109,8 +103,8 @@ $(document).ready(function () {
         const bookPrice = bookContainer.find('h5').text();
 
         if (countb2 > 1) {
-            console.log('hhuhuh', countb2)
-            $(para).text(countb2)
+            console.log('hhuhuh', countb2);
+            $(para).text(countb2);
             countb2 += 1;
         } else {
             images = document.createElement('img');
@@ -208,7 +202,7 @@ $(document).ready(function () {
             console.log('click', countb3);
             countb3 += 1;
             console.log('click', countb3);
-            showCount(countb3);
+            $(para).text(countb3);
         });
         $(decrebutton).click(function () {
             console.log('click', countb3);
@@ -218,7 +212,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb3);
+            $(para).text(countb3);
         });
     });
 
@@ -270,7 +264,7 @@ $(document).ready(function () {
             console.log('click', countb4);
             countb4 += 1;
             console.log('click', countb4);
-            showCount(countb4);
+            $(para).text(countb4);
         });
         $(decrebutton).click(function () {
             console.log('click', countb4);
@@ -280,7 +274,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb4);
+            $(para).text(countb4);
         });
     });
 
@@ -332,7 +326,7 @@ $(document).ready(function () {
             console.log('click', countb5);
             countb5 += 1;
             console.log('click', countb5);
-            showCount(countb5);
+            $(para).text(countb5);
         });
         $(decrebutton).click(function () {
             console.log('click', countb5);
@@ -342,7 +336,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb5);
+            $(para).text(countb5);
         });
     });
 
@@ -394,7 +388,7 @@ $(document).ready(function () {
             console.log('click', countb6);
             countb6 += 1;
             console.log('click', countb6);
-            showCount(countb6);
+            $(para).text(countb6);
         });
         $(decrebutton).click(function () {
             console.log('click', countb6);
@@ -404,7 +398,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb6);
+            $(para).text(countb6);
         });
     });
 
@@ -456,7 +450,7 @@ $(document).ready(function () {
             console.log('click', countb7);
             countb7 += 1;
             console.log('click', countb7);
-            showCount(countb7);
+            $(para).text(countb7);
         });
         $(decrebutton).click(function () {
             console.log('click', countb7);
@@ -466,7 +460,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb7);
+            $(para).text(countb7);
         });
     });
 
@@ -518,7 +512,7 @@ $(document).ready(function () {
             console.log('click', countb8);
             countb8 += 1;
             console.log('click', countb8);
-            showCount(countb8);
+            $(para).text(countb8);
         });
         $(decrebutton).click(function () {
             console.log('click', countb8);
@@ -528,7 +522,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb8);
+            $(para).text(countb8);
         });
     });
 
@@ -580,7 +574,7 @@ $(document).ready(function () {
             console.log('click', countb9);
             countb9 += 1;
             console.log('click', countb9);
-            showCount(countb9);
+            $(para).text(countb9);
         });
         $(decrebutton).click(function () {
             console.log('click', countb9);
@@ -590,7 +584,7 @@ $(document).ready(function () {
                 $('.imagesCart').css('display', 'none');
                 $('.contentCart').css('display', 'none');
             }
-            showCount(countb9);
+            $(para).text(countb9);
         });
     });
     $('#searchImg').click(function () {
