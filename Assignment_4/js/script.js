@@ -739,7 +739,6 @@ $(document).ready(function () {
     $('#checkout').click(function() {
         $('.cartCost').css('display', 'flex');
         let temp = 0;
-        let count = 0;
         $('.contentCart').each(function() {
             $(this).find('h5').each(function() {
                 let pp =  $(this).text();
@@ -751,7 +750,6 @@ $(document).ready(function () {
             console.log(temp, 'total value');
             $('#TCost').text(temp);
         });
-        console.log(count, 'count value');
         console.log(temp, 'total value');
         $('#TCost').text(temp);
     });
