@@ -43,7 +43,7 @@ $(document).ready(function () {
         if (countb1 > 1) {
             console.log('hhuhuh', countb1);
             $(para1).text(countb1);
-            countb1 += 1    
+            countb1 += 1
         } else {
             images1 = document.createElement('img');
             images1.setAttribute('src', bookImage);
@@ -88,7 +88,7 @@ $(document).ready(function () {
             const countCost = countb1 * 199;
             console.log(price, 'dec');
             let cost1 = countCost - price;
-            $(cartPrice1).text(cost1);    
+            $(cartPrice1).text(cost1);
             console.log(cost1, 'nn');
             if (countb1 === 0) {
                 $(images1).css("display", "none");
@@ -96,7 +96,7 @@ $(document).ready(function () {
                 $(cartAuthor1).css("display", "none");
                 $(cartPrice1).css("display", "none");
                 $(quantity1).css("display", "none");
-            } else{
+            } else {
                 $(images1).css("display", "block");
                 $(cartTitle1).css("display", "block");
                 $(cartAuthor1).css("display", "block");
@@ -164,14 +164,14 @@ $(document).ready(function () {
             const countCost = countb2 * 199;
             console.log(price, 'dec');
             let cost2 = countCost - price;
-            $(cartPrice2).text(cost2); 
+            $(cartPrice2).text(cost2);
             if (countb2 === 0) {
                 $(images2).css("display", "none");
                 $(cartTitle2).css("display", "none");
                 $(cartAuthor2).css("display", "none");
                 $(cartPrice2).css("display", "none");
                 $(quantity2).css("display", "none");
-            } else{
+            } else {
                 $(images2).css("display", "block");
                 $(cartTitle2).css("display", "block");
                 $(cartAuthor2).css("display", "block");
@@ -241,14 +241,14 @@ $(document).ready(function () {
             const countCost = countb3 * 199;
             console.log(price, 'dec');
             let cost3 = countCost - price;
-            $(cartPrice3).text(cost3); 
+            $(cartPrice3).text(cost3);
             if (countb3 === 0) {
                 $(images3).css("display", "none");
                 $(cartTitle3).css("display", "none");
                 $(cartAuthor3).css("display", "none");
                 $(cartPrice3).css("display", "none");
                 $(quantity3).css("display", "none");
-            } else{
+            } else {
                 $(images3).css("display", "block");
                 $(cartTitle3).css("display", "block");
                 $(cartAuthor3).css("display", "block");
@@ -316,14 +316,14 @@ $(document).ready(function () {
             const price = $(cartPrice4).val();
             const countCost = countb4 * 500;
             let cost4 = countCost - price;
-            $(cartPrice4).text(cost4); 
+            $(cartPrice4).text(cost4);
             if (countb4 === 0) {
                 $(images4).css("display", "none");
                 $(cartTitle4).css("display", "none");
                 $(cartAuthor4).css("display", "none");
                 $(cartPrice4).css("display", "none");
                 $(quantity4).css("display", "none");
-            } else{
+            } else {
                 $(images4).css("display", "block");
                 $(cartTitle4).css("display", "block");
                 $(cartAuthor4).css("display", "block");
@@ -374,7 +374,7 @@ $(document).ready(function () {
             quantity5.appendChild(para5);
             decrebutton5 = document.createElement('button');
             decrebutton5.innerHTML = ' - ';
-            quantity.appendChild(decrebutton5);
+            quantity5.appendChild(decrebutton5);
             $('.contentCart').append(quantity5);
             countb5 += 1;
         }
@@ -398,7 +398,7 @@ $(document).ready(function () {
                 $(cartAuthor5).css("display", "none");
                 $(cartPrice5).css("display", "none");
                 $(quantity5).css("display", "none");
-            } else{
+            } else {
                 $(images5).css("display", "block");
                 $(cartTitle5).css("display", "block");
                 $(cartAuthor5).css("display", "block");
@@ -473,7 +473,7 @@ $(document).ready(function () {
                 $(cartAuthor6).css("display", "none");
                 $(cartPrice6).css("display", "none");
                 $(quantity6).css("display", "none");
-            } else{
+            } else {
                 $(images6).css("display", "block");
                 $(cartTitle6).css("display", "block");
                 $(cartAuthor6).css("display", "block");
@@ -548,7 +548,7 @@ $(document).ready(function () {
                 $(cartAuthor7).css("display", "none");
                 $(cartPrice7).css("display", "none");
                 $(quantity7).css("display", "none");
-            } else{
+            } else {
                 $(images7).css("display", "block");
                 $(cartTitle7).css("display", "block");
                 $(cartAuthor7).css("display", "block");
@@ -623,7 +623,7 @@ $(document).ready(function () {
                 $(cartAuthor8).css("display", "none");
                 $(cartPrice8).css("display", "none");
                 $(quantity8).css("display", "none");
-            } else{
+            } else {
                 $(images8).css("display", "block");
                 $(cartTitle8).css("display", "block");
                 $(cartAuthor8).css("display", "block");
@@ -698,7 +698,7 @@ $(document).ready(function () {
                 $(cartAuthor9).css("display", "none");
                 $(cartPrice9).css("display", "none");
                 $(quantity9).css("display", "none");
-            } else{
+            } else {
                 $(images9).css("display", "block");
                 $(cartTitle9).css("display", "block");
                 $(cartAuthor9).css("display", "block");
@@ -736,15 +736,15 @@ $(document).ready(function () {
         }
     });
 
-    $('#checkout').click(function() {
+    $('#checkout').click(function () {
         $('.cartCost').css('display', 'flex');
         let temp = 0;
-        $('.contentCart').each(function() {
-            $(this).find('h5').each(function() {
-                let pp =  $(this).text();
+        $('.contentCart').each(function () {
+            $(this).find('h5').each(function () {
+                let pp = $(this).text();
                 console.log(pp, 'inside');
-                let valnum = Number(pp); 
-                console.log(valnum,'value');
+                let valnum = Number(pp);
+                console.log(valnum, 'value');
                 temp += valnum;
             });
             console.log(temp, 'total value');
