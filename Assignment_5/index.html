@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 5</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <section class="container">
+        <header class="heading">
+            <div class="rightHeading">
+                <div id="logo">
+                    <img src="image/logo.jpeg" alt="logo">
+                </div>
+                <h1>Digital World</h1>
+            </div>
+            <div class="leftHeading">
+                <div id="notification">
+                    <img src="image/noti.jpg" alt="notification">
+                </div>
+                <div id="profile">
+                    <img src="image/profile.png" alt="profile">
+                </div>
+            </div>
+        </header>
+    </section>
+    <section class="container">
+        <div class="dropdown">
+            <div class="sort">
+                <label for="sort" id="sortLable">Sort The Products :</label>
+                <select name="sort" id="sort">
+                    <option>sort accordingly</option>
+                    <option value="lth">price - low to high</option>
+                    <option value="htl">price - high to low</option>
+                    <option value="rating">product rating</option>
+                </select>
+            </div>
+            <div class="filterD">
+                <label for="filter">Category : </label>
+                <select name="filter" id="filter">
+                    <option>filter accordingly</option>
+                    <option value="smartphones">Smartphone</option>
+                    <option value="laptops">laptops</option>
+                    <option value="fragrances">fragrances</option>
+                    <option value="skincare">skincare</option>
+                    <option value="groceries">groceries</option>
+                </select>
+            </div>
+            <div class="searchArea">
+                <img src="image/search.jpeg" id="searchImg" alt="searchImg">
+                <input type="text" placeholder="Search items here" id="searchField">
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="mainClass">
+            <div class="searchResults">
+
+            </div>
+            <div class="productItem">
+
+            </div>
+            <div class="cart">
+                <div class="Carthead">
+                    <h3 id="cHead">Your Cart</h3>
+                </div>
+                <div class="cartItems">
+
+                </div>
+                <div>
+                    <button type="submit"  id="checkout">Checkout</button>
+                </div>
+                <div class="cartCost">
+                    <p>Total Cost : </p>
+                    <p id="TCost"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/code.jquery.com_jquery-3.7.0.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
