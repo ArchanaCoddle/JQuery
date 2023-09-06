@@ -719,7 +719,7 @@ $(document).ready(function () {
         console.log(searchTitle);
 
         $('.books').each(function () {
-            var itemTitle = $(this).find('h3').text().toLowerCase();
+            let itemTitle = $(this).find('h3').text().toLowerCase();
             console.log($(this).text(), 'before if');
             if (itemTitle.includes(searchTitle)) {
                 $('.searchResults').append($(this));
