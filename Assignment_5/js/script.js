@@ -2,30 +2,35 @@ $(document).ready(function () {
     let productItem = document.querySelector('.productItem');
     let cart = document.querySelector('.cartItems');
     let flg = 0;
+    let inital = 0;
+    let final = 3;
+    let itm;
     function fetchData() {
         let http = new XMLHttpRequest();
         http.open('GET', 'https://dummyjson.com/products', true);
         http.onreadystatechange = function () {
             if (http.readyState === 4 && http.status === 200) {
                 let data = JSON.parse(http.responseText);
-                if(flg == 0){
-                    showInfo(data.products.slice(0, 3));
-                    flg = 1 ;
+                let limit = data.limit;
+                itm = data.products;
+                if (flg == 0) {
+                    showInfo(data.products.slice(inital, final));
+                    inital += 3;
+                    flg = 1;
                 }
-                else if(flg == 1){
-                        showInfo(data.products.slice(3, data.limit));
-                        flg = 2;
+                else if ((flg == 1) && (final < limit)) {
+                    final = inital + 3;
+                    showInfo(data.products.slice(inital, final));
+                    inital += 3;
                 }
             }
         };
         http.send();
     }
     function showInfo(data) {
-        console.log(data[0].id);
         let count = 1;
         let qntyt = 1;
         data.forEach((element) => {
-            console.log(element);
             dataItems = document.createElement('div');
             dataItems.setAttribute('class', 'dataItem');
             thumbImage = document.createElement('div');
@@ -39,7 +44,6 @@ $(document).ready(function () {
             dataItems.appendChild(imagedetails);
             productItem.appendChild(dataItems);
             thumbnail = document.createElement('img');
-            console.log(element.thumbnail, 'main image');
             thumbnail.setAttribute('src', element.thumbnail);
             thumbnail.setAttribute('alt', 'no image');
             thumbImage.appendChild(thumbnail);
@@ -64,7 +68,6 @@ $(document).ready(function () {
             buttonCart.setAttribute('class', 'buttonCart');
             buttonCart.setAttribute('id', `btnId${element.id}`);
             element.images.forEach(pics => {
-                console.log(pics);
                 imageslist = document.createElement('img');
                 imageslist.setAttribute('src', pics);
                 imageslist.setAttribute('alt', 'no image');
@@ -73,10 +76,7 @@ $(document).ready(function () {
             });
             $(document).on('click', `#btnId${element.id}`, function (e) {
                 $('#checkout').css('display', 'block');
-                console.log('buttonfuntn');
                 let btnIdValue = $(this).attr('id');
-                console.log(btnIdValue);
-                console.log($(this));
                 let mainData = $(this).closest('.aboutItem');
                 const cartTitle = mainData.find('h3').text();
                 const cartoffer = mainData.find('h4').text();
@@ -101,7 +101,6 @@ $(document).ready(function () {
                 $(para).attr('class', 'quantityCount');
                 $(para).attr('id', 'qntyt' + qntyt);
                 qntyt += 1;
-                console.log(qntyt)
                 quantity.appendChild(para);
                 let decrebutton = document.createElement('button');
                 decrebutton.innerHTML = ' - ';
@@ -111,8 +110,6 @@ $(document).ready(function () {
                 count += 1;
                 $(increbutton).click(function () {
                     let idName = $(para).attr('id');
-                    console.log(idName);
-                    console.log('click', count);
                     let cost = count * cartPrice;
                     $(cartPri).text(cost);
                     $(`#${idName}`).text(count);
@@ -120,13 +117,9 @@ $(document).ready(function () {
                 });
                 $(decrebutton).click(function () {
                     let idName = $(para).attr('id');
-                    console.log(idName);
                     count -= 1;
                     $(`#${idName}`).text(count);
-                    console.log('clickdec', count);
-                    console.log(price);
                     const cost = count * cartPrice;
-                    console.log(cost, 'gg');
                     $(cartPri).text(cost);
                     if (count === 0) {
                         $(carttit).css("display", "none");
@@ -167,46 +160,43 @@ $(document).ready(function () {
         }
         $('#sort').click(function () {
             let sortingItem = $('#sort').val();
-            console.log(sortingItem);
+            let filterItem = $('#filter').val();
+            let filteredItems = itm;
+
+            if (filterItem !== 'filter accordingly') {
+                filteredItems = itm.filter(item => {
+                    item.category.toLowerCase() === filterItem
+                });
+            }
             if (sortingItem === 'lth') {
-                console.log('Ascending order');
-                let asc = data.sort((a, b) => {
+                filteredItems.sort((a, b) => {
                     const priceA = a.price;
                     const priceB = b.price;
                     return priceA - priceB;
                 });
-                console.log(asc);
-                elemntsProducts(asc);
             } else if (sortingItem === 'htl') {
-                console.log('descending order');
-                let des = data.sort((a, b) => {
+                filteredItems.sort((a, b) => {
                     const priceA = a.price;
                     const priceB = b.price;
                     return priceB - priceA;
                 });
-                console.log(des);
-                elemntsProducts(des);
             } else if (sortingItem === 'rating') {
-                console.log('rating order', data)
-                let rat = data.sort((a, b) => {
+                filteredItems.sort((a, b) => {
                     const ratA = a.rating;
                     const ratB = b.rating;
                     return ratA - ratB;
                 });
-                console.log('rting', rat);
-                elemntsProducts(rat);
             }
+            elemntsProducts(filteredItems);
         });
-        $('#filter').click(function () {
+        $('#filter').click(function filtering() {
             $('.searchResults').css('display', 'block');
             $('.productItem').css('display', 'none');
             let filterItem = $(this).val();
-            console.log(filterItem);
             $('.searchResults').empty();
-            data.forEach((item) => {
+            itm.forEach((item) => {
                 let category = item.category.toLowerCase();
                 if (category === filterItem) {
-                    console.log('item', item);
                     let itemElement = document.createElement('div');
                     itemElement.setAttribute('class', 'dataItem');
                     itemElement.innerHTML = `
@@ -237,11 +227,8 @@ $(document).ready(function () {
             $('.searchResults').empty();
             let flag = false;
             let searchTitle = $('#searchField').val().toLowerCase();
-            console.log(searchTitle);
-            data.forEach(e => {
+            itm.forEach(e => {
                 let titleProdt = e.title.toLowerCase();
-                console.log(titleProdt);
-                console.log(searchTitle);
                 if (titleProdt.includes(searchTitle)) {
                     let serchElement = document.createElement('div');
                     serchElement.setAttribute('class', 'dataItem');
@@ -263,7 +250,6 @@ $(document).ready(function () {
                             <img src="${e.images[2]}" alt="no-image" class="imageextra">
                             <img src="${e.images[3]}" alt="no-image" class="imageextra">
                         </div>`;
-                    console.log(e.images);
                     $('.searchResults').append(serchElement);
                     flag = true;
                 }
@@ -281,23 +267,17 @@ $(document).ready(function () {
             $('.cart').each(function () {
                 $(this).find('h5').each(function () {
                     let pp = $(this).text();
-                    console.log(pp, 'inside');
                     let valnum = Number(pp);
-                    console.log(valnum, 'value');
                     temp += valnum;
                 });
-                console.log(temp, 'total value');
                 $('#TCost').text(temp);
             });
-            console.log(temp, 'total value');
             $('#TCost').text(temp);
         });
-        
     }
-
     fetchData();
-    window.addEventListener('scroll',function () {
-        if(this.window.innerHeight + this.document.documentElement.scrollTop + 1 >= this.document.documentElement.scrollHeight){
+    window.addEventListener('scroll', function () {
+        if (this.window.innerHeight + this.document.documentElement.scrollTop + 1 >= this.document.documentElement.scrollHeight) {
             fetchData();
         }
     });
