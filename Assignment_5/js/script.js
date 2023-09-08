@@ -162,45 +162,55 @@ $(document).ready(function () {
             let sortingItem = $('#sort').val();
             let filterItem = $('#filter').val();
             let filteredItems = itm;
+            let sort;
             if (filterItem == 'sort accordingly'){
                 $('.productItem').css('display', 'block');
             }
             if (filterItem !== 'sort accordingly') {
                 filteredItems = itm.filter(item => item.category.toLowerCase() === filterItem);
+                if (sortingItem === 'lth') {
+                    filteredItems.sort((a, b) => {
+                        const priceA = a.price;
+                        const priceB = b.price;
+                        return priceA - priceB;
+                    });
+                } else if (sortingItem === 'htl') {
+                    filteredItems.sort((a, b) => {
+                        const priceA = a.price;
+                        const priceB = b.price;
+                        return priceB - priceA;
+                    });
+                } else if (sortingItem === 'rating') {
+                    filteredItems.sort((a, b) => {
+                        const ratA = a.rating;
+                        const ratB = b.rating;
+                        return ratA - ratB;
+                    });
+                }
+                elemntsProducts(filteredItems);
             }
             if (sortingItem === 'lth') {
-                filteredItems.sort((a, b) => a.price - b.price);
-            } else if (sortingItem === 'htl') {
-                filteredItems.sort((a, b) => b.price - a.price);
-            } else if (sortingItem === 'rating') {
-                filteredItems.sort((a, b) => a.rating - b.rating);
-            }
-            elemntsProducts(filteredItems);
-            if (sortingItem === 'lth') {
-                let asc = itm.sort((a, b) => {
+                sort = itm.sort((a, b) => {
                     const priceA = a.price;
                     const priceB = b.price;
                     return priceA - priceB;
                 });
-                elemntsProducts(asc);
             } else if (sortingItem === 'htl') {
-                let des = itm.sort((a, b) => {
+                sort = itm.sort((a, b) => {
                     const priceA = a.price;
                     const priceB = b.price;
                     return priceB - priceA;
                 });
-                elemntsProducts(des);
             } else if (sortingItem === 'rating') {
-                let rat = itm.sort((a, b) => {
+                sort = itm.sort((a, b) => {
                     const ratA = a.rating;
                     const ratB = b.rating;
                     return ratA - ratB;
                 });
-                elemntsProducts(rat);
             }
+            elemntsProducts(sort);
         });
-        $('#filter').click(function filtering () {
-            
+        $('#filter').click(function () {
             let filterItem = $(this).val();
             $('.searchResults').empty();
             itm.forEach((item) => {
