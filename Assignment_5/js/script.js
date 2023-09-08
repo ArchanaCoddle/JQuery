@@ -161,12 +161,13 @@ $(document).ready(function () {
         $('#sort').click(function () {
             let sortingItem = $('#sort').val();
             let filterItem = $('#filter').val();
+            console.log(filterItem);
             let filteredItems = itm;
             let sort;
-            if (filterItem == 'sort accordingly'){
+            if (filterItem == 'all'){
                 $('.productItem').css('display', 'block');
             }
-            if (filterItem !== 'sort accordingly') {
+            if (filterItem !== 'all') {
                 filteredItems = itm.filter(item => item.category.toLowerCase() === filterItem);
                 if (sortingItem === 'lth') {
                     filteredItems.sort((a, b) => {
@@ -188,27 +189,28 @@ $(document).ready(function () {
                     });
                 }
                 elemntsProducts(filteredItems);
+            } else{
+                if (sortingItem === 'lth') {
+                    sort = itm.sort((a, b) => {
+                        const priceA = a.price;
+                        const priceB = b.price;
+                        return priceA - priceB;
+                    });
+                } else if (sortingItem === 'htl') {
+                    sort = itm.sort((a, b) => {
+                        const priceA = a.price;
+                        const priceB = b.price;
+                        return priceB - priceA;
+                    });
+                } else if (sortingItem === 'rating') {
+                    sort = itm.sort((a, b) => {
+                        const ratA = a.rating;
+                        const ratB = b.rating;
+                        return ratA - ratB;
+                    });
+                }
+                elemntsProducts(sort);
             }
-            if (sortingItem === 'lth') {
-                sort = itm.sort((a, b) => {
-                    const priceA = a.price;
-                    const priceB = b.price;
-                    return priceA - priceB;
-                });
-            } else if (sortingItem === 'htl') {
-                sort = itm.sort((a, b) => {
-                    const priceA = a.price;
-                    const priceB = b.price;
-                    return priceB - priceA;
-                });
-            } else if (sortingItem === 'rating') {
-                sort = itm.sort((a, b) => {
-                    const ratA = a.rating;
-                    const ratB = b.rating;
-                    return ratA - ratB;
-                });
-            }
-            elemntsProducts(sort);
         });
         $('#filter').click(function () {
             let filterItem = $(this).val();
