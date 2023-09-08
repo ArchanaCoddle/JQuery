@@ -344,7 +344,7 @@ $(document).ready(function () {
         });   
     }
     fetchData();
-    window.addEventListener('scroll',function () {
+    $(window).scroll(function() {
         if(this.window.innerHeight + this.document.documentElement.scrollTop + 1 >= this.document.documentElement.scrollHeight){
             fetchData();
         }
