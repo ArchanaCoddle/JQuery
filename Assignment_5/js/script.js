@@ -13,12 +13,12 @@ $(document).ready(function () {
                 let data = JSON.parse(http.responseText);
                 let limit = data.limit;
                 itm = data.products;
-                if (flg == 0) {
+                if(flg == 0){
                     showInfo(data.products.slice(inital, final));
                     inital += 3;
-                    flg = 1;
+                    flg = 1 ;
                 }
-                else if ((flg == 1) && (final < limit)) {
+                else if( (flg == 1) && (final < limit) ){
                     final = inital + 3;
                     showInfo(data.products.slice(inital, final));
                     inital += 3;
@@ -162,41 +162,55 @@ $(document).ready(function () {
             let sortingItem = $('#sort').val();
             let filterItem = $('#filter').val();
             let filteredItems = itm;
-
-            if (filterItem !== 'filter accordingly') {
-                filteredItems = itm.filter(item => {
-                    item.category.toLowerCase() === filterItem
-                });
+            if (filterItem == 'sort accordingly'){
+                $('.productItem').css('display', 'block');
+            }
+            if (filterItem !== 'sort accordingly') {
+                filteredItems = itm.filter(item => item.category.toLowerCase() === filterItem);
             }
             if (sortingItem === 'lth') {
-                filteredItems.sort((a, b) => {
+                filteredItems.sort((a, b) => a.price - b.price);
+            } else if (sortingItem === 'htl') {
+                filteredItems.sort((a, b) => b.price - a.price);
+            } else if (sortingItem === 'rating') {
+                filteredItems.sort((a, b) => a.rating - b.rating);
+            }
+            elemntsProducts(filteredItems);
+            if (sortingItem === 'lth') {
+                let asc = itm.sort((a, b) => {
                     const priceA = a.price;
                     const priceB = b.price;
                     return priceA - priceB;
                 });
+                elemntsProducts(asc);
             } else if (sortingItem === 'htl') {
-                filteredItems.sort((a, b) => {
+                let des = itm.sort((a, b) => {
                     const priceA = a.price;
                     const priceB = b.price;
                     return priceB - priceA;
                 });
+                elemntsProducts(des);
             } else if (sortingItem === 'rating') {
-                filteredItems.sort((a, b) => {
+                let rat = itm.sort((a, b) => {
                     const ratA = a.rating;
                     const ratB = b.rating;
                     return ratA - ratB;
                 });
+                elemntsProducts(rat);
             }
-            elemntsProducts(filteredItems);
         });
-        $('#filter').click(function filtering() {
-            $('.searchResults').css('display', 'block');
-            $('.productItem').css('display', 'none');
+        $('#filter').click(function filtering () {
+            
             let filterItem = $(this).val();
             $('.searchResults').empty();
             itm.forEach((item) => {
                 let category = item.category.toLowerCase();
-                if (category === filterItem) {
+                if(category === 'all'){
+                    $('.productItem').css('display', 'block');
+                }
+                else if (category === filterItem) {
+                    $('.searchResults').css('display', 'block');
+                    $('.productItem').css('display', 'none');
                     let itemElement = document.createElement('div');
                     itemElement.setAttribute('class', 'dataItem');
                     itemElement.innerHTML = `
@@ -227,38 +241,79 @@ $(document).ready(function () {
             $('.searchResults').empty();
             let flag = false;
             let searchTitle = $('#searchField').val().toLowerCase();
-            itm.forEach(e => {
-                let titleProdt = e.title.toLowerCase();
-                if (titleProdt.includes(searchTitle)) {
-                    let serchElement = document.createElement('div');
-                    serchElement.setAttribute('class', 'dataItem');
-                    serchElement.innerHTML = `
-                        <div class="imagesizing" >
-                            <img src="${e.thumbnail}" alt="no-image">
-                        </div>
-                        <div class="aboutItem">
-                            <h3>${e.title}</h3>
-                            <p>${e.description}</p>
-                            <h5>${e.price}</h5>
-                            <h4>discount offer :  ${e.discountPercentage}</h4>
-                            <p>rating :  ${e.rating}</p>
-                            <button class="buttonCart" id="btnId${e.id}">Add Cart</button>
-                        </div>
-                        <div class="imageslist" >
-                            <img src="${e.images[0]}" alt="no-image" class="imageextra">
-                            <img src="${e.images[1]}" alt="no-image" class="imageextra">
-                            <img src="${e.images[2]}" alt="no-image" class="imageextra">
-                            <img src="${e.images[3]}" alt="no-image" class="imageextra">
-                        </div>`;
-                    $('.searchResults').append(serchElement);
-                    flag = true;
+            let filterItem = $('#filter').val().toLowerCase();
+            let filteredItems = itm;
+            if(filterItem !== 'all'){
+                filteredItems = itm.filter(item => {
+                    if (item.category.toLowerCase() === filterItem){
+                        let titleProdt = item.title.toLowerCase();
+                        if (titleProdt.includes(searchTitle)) {
+                            let serchElement = document.createElement('div');
+                            serchElement.setAttribute('class', 'dataItem');
+                            serchElement.innerHTML = `
+                                <div class="imagesizing" >
+                                    <img src="${item.thumbnail}" alt="no-image">
+                                </div>
+                                <div class="aboutItem">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.description}</p>
+                                    <h5>${item.price}</h5>
+                                    <h4>discount offer :  ${item.discountPercentage}</h4>
+                                    <p>rating :  ${item.rating}</p>
+                                    <button class="buttonCart" id="btnId${item.id}">Add Cart</button>
+                                </div>
+                                <div class="imageslist" >
+                                    <img src="${item.images[0]}" alt="no-image" class="imageextra">
+                                    <img src="${item.images[1]}" alt="no-image" class="imageextra">
+                                    <img src="${item.images[2]}" alt="no-image" class="imageextra">
+                                    <img src="${item.images[3]}" alt="no-image" class="imageextra">
+                                </div>`;
+                            $('.searchResults').append(serchElement);
+                            flag = true;
+                        }
+                        flag === true;
+                    } 
+                });
+                if(flag === false){
+                    notFound = document.createElement('p');
+                    notFound.innerHTML = ' Sorry, The product is not found in the category ';
+                    $(notFound).attr('class', 'notFound');
+                    $('.searchResults').append(notFound);
                 }
-            });
-            if (flag === false) {
-                notFound = document.createElement('p');
-                notFound.innerHTML = ' Sorry, The product is not found ';
-                $(notFound).attr('class', 'notFound');
-                $('.searchResults').append(notFound);
+            } else {
+                itm.forEach(e => {
+                    let titleProdt = e.title.toLowerCase();
+                    if (titleProdt.includes(searchTitle)) {
+                        let serchElement = document.createElement('div');
+                        serchElement.setAttribute('class', 'dataItem');
+                        serchElement.innerHTML = `
+                            <div class="imagesizing" >
+                                <img src="${e.thumbnail}" alt="no-image">
+                            </div>
+                            <div class="aboutItem">
+                                <h3>${e.title}</h3>
+                                <p>${e.description}</p>
+                                <h5>${e.price}</h5>
+                                <h4>discount offer :  ${e.discountPercentage}</h4>
+                                <p>rating :  ${e.rating}</p>
+                                <button class="buttonCart" id="btnId${e.id}">Add Cart</button>
+                            </div>
+                            <div class="imageslist" >
+                                <img src="${e.images[0]}" alt="no-image" class="imageextra">
+                                <img src="${e.images[1]}" alt="no-image" class="imageextra">
+                                <img src="${e.images[2]}" alt="no-image" class="imageextra">
+                                <img src="${e.images[3]}" alt="no-image" class="imageextra">
+                            </div>`;
+                        $('.searchResults').append(serchElement);
+                        flag = true;
+                    }
+                });
+                if (flag === false) {
+                    notFound = document.createElement('p');
+                    notFound.innerHTML = ' Sorry, The product is not found ';
+                    $(notFound).attr('class', 'notFound');
+                    $('.searchResults').append(notFound);
+                }
             }
         });
         $('#checkout').click(function () {
@@ -273,11 +328,11 @@ $(document).ready(function () {
                 $('#TCost').text(temp);
             });
             $('#TCost').text(temp);
-        });
+        });   
     }
     fetchData();
-    window.addEventListener('scroll', function () {
-        if (this.window.innerHeight + this.document.documentElement.scrollTop + 1 >= this.document.documentElement.scrollHeight) {
+    window.addEventListener('scroll',function () {
+        if(this.window.innerHeight + this.document.documentElement.scrollTop + 1 >= this.document.documentElement.scrollHeight){
             fetchData();
         }
     });
