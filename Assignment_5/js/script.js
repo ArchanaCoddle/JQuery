@@ -131,8 +131,6 @@ $(document).ready(function () {
             });
         });
         function elemntsProducts(e) {
-            $('.searchResults').css('display', 'block');
-            $('.productItem').css('display', 'none');
             $('.searchResults').empty();
             e.forEach((item) => {
                 let itemElement = document.createElement('div');
@@ -155,6 +153,8 @@ $(document).ready(function () {
                             <img src="${item.images[2]}" alt="no-image" class="imageextra">
                             <img src="${item.images[3]}" alt="no-image" class="imageextra">
                         </div>`;
+                        $('.searchResults').css('display', 'block');
+            $('.productItem').css('display', 'none');
                 $('.searchResults').append(itemElement);
             });
         }
@@ -166,6 +166,7 @@ $(document).ready(function () {
             let sort;
             if (filterItem == 'all'){
                 $('.productItem').css('display', 'block');
+                $('.searchResults').css('display', 'none');
             }
             if (filterItem !== 'all') {
                 filteredItems = itm.filter(item => item.category.toLowerCase() === filterItem);
